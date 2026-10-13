@@ -52,20 +52,30 @@ See [`openshift/README.md`](openshift/README.md) for the full OpenShift flow (`d
     podman build --format docker -f deployment/Containerfile -t ceph-test-dashboard:latest .
     ```
 
-3. **Start the service**
+3. **Create a data directory (persistent volume)**
+
+    Podman mounts a host directory at `/var/lib/ceph-test-dashboard` (same path as OpenShift). Create it once:
+
+    ```sh
+    mkdir -p ./ceph-test-dashboard-data
+    ```
+
+4. **Start the service**
 
     ```sh
     podman-compose -f deployment/podman-compose.yaml up -d
     ```
 
-    To use a custom config file path or port:
+    To use a custom config file path, port, or data directory:
 
     ```sh
-    CONFIG_FILE=/path/to/config.ini DASHBOARD_PORT=9000 \
+    CONFIG_FILE=/path/to/config.ini \
+    DATA_DIR=/path/to/ceph-test-dashboard-data \
+    DASHBOARD_PORT=9000 \
       podman-compose -f deployment/podman-compose.yaml up -d
     ```
 
-4. **Verify the deployment**
+5. **Verify the deployment**
 
     ```sh
     podman-compose -f deployment/podman-compose.yaml ps
@@ -73,15 +83,19 @@ See [`openshift/README.md`](openshift/README.md) for the full OpenShift flow (`d
 
     The container should show "Up" status.
 
-5. **Access the dashboard**
+6. **Access the dashboard**
 
     Open your browser at `http://localhost:8501` (or the custom port you set).
+
+    On first start the app initializes the data volume (marker file) and writes
+    `mail-state.sqlite` there when outbound mail is enabled.
 
 ### Environment Variables
 
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `CONFIG_FILE` | `~/.config/ceph-test-dashboard.ini` | Path to the config file on the host |
+| `DATA_DIR` | `./ceph-test-dashboard-data` | Host dir mounted at `/var/lib/ceph-test-dashboard` |
 | `DASHBOARD_PORT` | `8501` | Host port to expose the dashboard on |
 
 ### Managing the Service

@@ -47,6 +47,22 @@ DEFAULT_CATALOG_DAYS = 30
 # Branches shown on the Releases report
 DEFAULT_RELEASE_BRANCHES = ("main", "umbrella", "tentacle", "squid")
 
+# [alerts] email (Sepia lab SMTP relay)
+DEFAULT_ALERTS_ENABLED = False
+DEFAULT_ALERTS_SMTP_HOST = "relay.front.sepia.ceph.com"
+DEFAULT_ALERTS_SMTP_PORT = 25
+DEFAULT_ALERTS_FROM_ADDR = "ceph-nightly@sepia.ceph.com"
+DEFAULT_ALERTS_NIGHTLY_ANCHOR_HOUR = 6
+DEFAULT_ALERTS_NIGHTLY_ANCHOR_MINUTE = 0
+DEFAULT_ALERTS_DAILY_REPORT_ANCHOR_HOUR = 18
+DEFAULT_ALERTS_DAILY_REPORT_ANCHOR_MINUTE = 0
+DEFAULT_ALERTS_DAILY_LOOKBACK_DAYS = 1
+DEFAULT_ALERTS_WEEKLY_FETCH_DAYS = 21
+DEFAULT_ALERTS_DAILY_FETCH_DAYS = 5
+DEFAULT_ALERTS_SMOKE_SUITE_MATCH = "smoke"
+DEFAULT_DATA_DIR = "/var/lib/ceph-test-dashboard"
+DEFAULT_ALERTS_SQLITE_PATH = "mail-state.sqlite"
+
 STATUS_COMPLETED = frozenset({"pass", "fail", "dead"})
 STATUS_FAILING = frozenset({"fail", "dead"})
 STATUS_ACTIVE = frozenset({"running", "queued", "waiting"})

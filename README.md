@@ -84,12 +84,17 @@ See [`deployment/README.md`](deployment/README.md) for full Podman deployment in
 | Coverage | `pages/reports/coverage.py` | Suite-centric view comparing coverage, failures, and flaky tests across branches |
 | Hardware | `pages/reports/hardware.py` | Machine-type-centric reliability dashboard comparing branches, suites, and OS for a selected lab class |
 
+### Archive
+
+| Page | Path | Description |
+|------|------|-------------|
+| Email reports | `pages/archive/email_reports.py` | Sent nightly mail archive and scheduler status |
+
 ### Tools
 
 | Page | Path | Description |
 |------|------|-------------|
 | Search | `pages/tools/search.py` | Search runs and jobs |
-| Alerts | `pages/tools/alerts.py` | Automated alerts for high failure rates, dead jobs, and flaky suites |
 | Agent | `pages/tools/agent.py` | AI agent for asking questions about test runs, jobs, and failures |
 
 ## Architecture
